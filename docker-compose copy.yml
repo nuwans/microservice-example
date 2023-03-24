@@ -1,0 +1,49 @@
+version: "3"
+services:
+    main-api:
+        container_name: main-api
+        build: ./main-api
+        command: yarn start
+        env_file:
+            - .env
+        volumes:
+            - ./main-api:/usr/src/app/main-api
+        ports:
+            - "3000:3000"
+    queue-api:
+        container_name: queue-api
+        build: ./queue-api
+        command: yarn start
+        env_file:
+            - .env
+        volumes:
+            - ./queue-api:/usr/src/app/que-api
+        ports:
+            - "3001:3001"
+            
+    postgresql:
+        image: postgres:14-alpine
+        ports: 
+            - "5432:5432"
+        volumes: 
+            - data:/var/lib/postgresql/data
+
+    rabbitmq:
+        image: rabbitmq:3.10-rc-management-alpine
+        ports:
+            # AMQP protocol port
+            - "5672:5672"
+            # HTTP management UI
+            - "15672:15672"
+      queue-api:
+        container_name: queue-api
+        build:
+            context: ./queue-api
+            dockerfile: .Dockerfile-queue
+        command: yarn start
+        env_file:
+            - .env
+        volumes:
+            - ./queue-api:/usr/src/queue-api
+        ports:
+            - "3006:3006"

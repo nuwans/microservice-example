@@ -1,0 +1,38 @@
+version: "3"
+services:
+    main-api:
+        container_name: main-api
+        build:
+            context: ./main-api
+            #dockerfile: ../Dockerfile-main
+        command: yarn start
+        env_file:
+            - ./dev.env
+        volumes:
+            - ./main-api:/usr/src/main-api
+        ports:
+            - "3005:3005"
+        depends_on:
+            - rabbitmq
+
+    queue-api:
+        container_name: queue-api
+        build:
+            context: ./queue-api
+        command: yarn start
+        env_file:
+            - ./dev.env
+        volumes:
+            - ./queue-api:/usr/src/queue-api
+        ports:
+            - "3006:3006"
+        depends_on:
+            - rabbitmq
+    rabbitmq:
+        image: rabbitmq:3.10-rc-management-alpine
+        ports:
+            # AMQP protocol port
+            - "5672:5672"
+            # HTTP management UI
+            - "15672:15672"
+  

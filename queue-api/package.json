@@ -1,0 +1,29 @@
+{
+  "dependencies": {
+    "@types/amqplib": "^0.10.1",
+    "@types/express": "^4.17.17",
+    "@types/node": "^18.15.5",
+    "@types/nodemailer": "^6.4.7",
+    "amqplib": "^0.10.3",
+    "body-parser": "^1.20.2",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "nodemailer": "^6.9.1",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.2"
+  },
+  "name": "oparation-service",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/index.js",
+    "build": "tsc -p .",
+    "dev:start": "nodemon"
+  },
+  "author": "Nuwan",
+  "license": "ISC",
+  "description": "Save in db and put the payload in to a queue"
+}
