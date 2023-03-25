@@ -1,4 +1,4 @@
-import db from '../connecters/db'
+import db from 'mongoose'
 const emailSchema = new db.Schema({
     id: {
       type: Number,

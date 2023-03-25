@@ -1,5 +1,5 @@
 import nodemailer from 'nodemailer';
-import { iEmailBody } from '../../interfaces/body';
+import { iEmailBody } from '../interfaces/body';
 
 
 const  sendEmail=async (emailBody:iEmailBody)=> {
@@ -8,7 +8,7 @@ const  sendEmail=async (emailBody:iEmailBody)=> {
         service: 'gmail',
         auth: {
           user: 'linkedasset@gmail.com',
-          pass: 'shgtutujuoapribx',
+          pass: 'shgtutujuoapribx@qwe', //
         },
       });
       

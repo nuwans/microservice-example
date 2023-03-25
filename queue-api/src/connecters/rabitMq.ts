@@ -1,21 +1,22 @@
-
 import amqp, { Channel, Connection } from "amqplib/callback_api";
-export const rabitMqReceiver = async (): Promise<Channel> => {
-    const amqpServer = 'amqp://localhost';
-    return new Promise<Channel>((resolve, reject) => {
-      amqp.connect(amqpServer, async (err: any, connection: Connection) => {
+
+const { RABITMQ_URL = "amqp://localhost" } = process.env;
+export const rabbitMqReceiver = async (): Promise<Channel> => {
+  return new Promise<Channel>((resolve, reject) => {
+    amqp.connect(RABITMQ_URL, async (err: any, connection: Connection) => {
+      if (err) {
+        console.log("connection failed-------------", err);
+        reject(err);
+        return;
+      }
+      connection.createChannel((err: any, ch: Channel) => {
         if (err) {
           reject(err);
           return;
         }
-        connection.createChannel((err: any, ch: Channel) => {
-          if (err) {
-            reject(err);
-            return;
-          }
-          console.log("producer rabbitMQ: connected");
-          resolve(ch);
-        });
+        console.log("rabbitMQ: connected");
+        resolve(ch);
       });
     });
-  };
+  });
+};
