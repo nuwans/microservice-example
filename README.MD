@@ -17,12 +17,10 @@ The microservice project is a collection of small, independent services that wor
  
  ### `main-api` 
  This api listens for requests and return a empty response without waiting for other tasks to execute.
- 1. App listens to POST request in `/` path 
-        ```javascript
-        {
-            "content":"This is email content",
-            "email":"valid email address"
-        }
+ 1. App listens to POST request in `/` path with payload
+
+        ```
+        {"content":"This is email content","email":"valid email address"}
         ```
  2. Add payload to a asynchronous queue to execute without waiting for execute
  3. Send Response
@@ -33,8 +31,6 @@ The microservice project is a collection of small, independent services that wor
 3. Save in database.
  
 
- README
-This README provides an overview of the microservice project and instructions on how to set it up and use it.
 ### Set up guide
 To set up the microservice project, follow these steps:
 
@@ -54,7 +50,7 @@ Clone the repository to your local machine.
     ```
     (if you want to run in development mode run )
     ``` yarn dev:start ```
-3. After installing dependancies you can deploy these apis to docker container
+3. After installing dependancies you can deploy these apis to docker container but first make sure Docker instaled in your computer
     to run both api in one command
     run ``` docker-compose -f docker-compose.yml   up --build ```
 
